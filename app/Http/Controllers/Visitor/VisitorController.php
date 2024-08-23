@@ -38,7 +38,6 @@ class VisitorController extends Controller
         
         return Inertia::render('Visitor/Index', [
             'visitors' => $visitors,
-            'searchParams' => $request->all(),
             'checkinTypes' => $checkinTypes,
             'purposeOfVisit' => $purposeOfVisit,
         ]);    

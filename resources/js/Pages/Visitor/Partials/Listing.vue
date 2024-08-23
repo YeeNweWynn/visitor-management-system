@@ -15,7 +15,6 @@ defineProps({
 
 const headers = ["Name", "Email", "Phone", "Address", "Postal Code", "Action"];
 const visitors = usePage().props.visitors.data;
-const searchParams = usePage().props.searchParams || {};
 const checkinTypes = usePage().props.checkinTypes;
 const purposeOfVisit = usePage().props.purposeOfVisit;
 const showModal = ref(false);
@@ -75,7 +74,6 @@ const checkoutVisitor = (checkinId) => {
             {{ $page.props.flash.error }}
         </p>
     </div>
-
     <div class="overflow-x-auto">
         <table class="w-full whitespace-no-wrapw-full whitespace-no-wrap">
             <thead>
@@ -100,9 +98,13 @@ const checkoutVisitor = (checkinId) => {
                             {{ visitor.email }}
                         </Link>
                     </td>
-                    <td class="border px-6 py-4">{{ visitor.phone_number }}</td>
+                    <td class="border px-6 py-4">
+                        {{ visitor.phone_number }}
+                    </td>
                     <td class="border px-6 py-4">{{ visitor.address }}</td>
-                    <td class="border px-6 py-4">{{ visitor.postal_code }}</td>
+                    <td class="border px-6 py-4">
+                        {{ visitor.postal_code }}
+                    </td>
                     <td class="border px-6 py-4">
                         <PrimaryButton
                             v-if="visitor.check_ins.length == 0"
@@ -121,11 +123,7 @@ const checkoutVisitor = (checkinId) => {
             </tbody>
         </table>
     </div>
-    <Pagination
-        class="mt-6"
-        :links="usePage().props.visitors.links"
-        :search-params="searchParams"
-    />
+    <Pagination class="mt-6" :links="usePage().props.visitors.links" />
     <CheckinModal
         :show="showModal"
         :visitor-id="selectedVisitorId"

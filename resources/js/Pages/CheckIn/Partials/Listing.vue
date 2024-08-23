@@ -22,7 +22,6 @@ const headers = [
     "Action",
 ];
 const checkIns = usePage().props.checkIns.data;
-const searchParams = usePage().props.searchParams || {};
 
 const formatDate = (dateString) => {
     if (!dateString) {
@@ -112,9 +111,5 @@ const checkoutVisitor = (checkinId) => {
             </tbody>
         </table>
     </div>
-    <Pagination
-        class="mt-6"
-        :links="usePage().props.checkIns.links"
-        :search-params="searchParams"
-    />
+    <Pagination class="mt-6" :links="usePage().props.checkIns.links" />
 </template>

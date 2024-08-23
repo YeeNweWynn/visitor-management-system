@@ -38,7 +38,8 @@ class VisitorModule implements VisitorModuleInterface
             $query->where('phone_number', $phone);
         }
 
-        return $query->paginate($limit);
+        return $query->paginate($limit)->withQueryString();
+        
     }
 
     public function find(int $id): ?Visitor 

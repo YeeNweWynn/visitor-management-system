@@ -29,7 +29,7 @@ class CheckInController extends Controller
             'label' => $type->name
         ], VisitStatus::cases());
         
-        return Inertia::render('CheckIn/Index', ['checkIns' => $checkIns, 'visitStatus' => $visitStatus, 'searchParams' => $request->all()]);
+        return Inertia::render('CheckIn/Index', ['checkIns' => $checkIns, 'visitStatus' => $visitStatus]);
     }
 
     /**

@@ -39,7 +39,7 @@ import { Head, Link } from "@inertiajs/vue3";
                     <Search />
                 </div>
                 <div class="p-4 sm:p-8 bg-white shadow sm:rounded-lg">
-                    <Listing class="max-w-xl" />
+                    <Listing />
                 </div>
             </div>
         </div>

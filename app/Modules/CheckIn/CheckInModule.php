@@ -35,8 +35,7 @@ class CheckInModule implements CheckInModuleInterface
                     ->withType($type)
                     ->withVehicleNumber($vehicleNumber);
         
-        //dd($query->get());
-        return $query->orderby('checked_in_at', 'desc')->paginate($limit);
+        return $query->orderby('checked_in_at', 'desc')->paginate($limit)->withQueryString();
     }
 
     public function findActiveCheckInOf(Visitor $visitor): ?CheckIn
@@ -49,7 +48,6 @@ class CheckInModule implements CheckInModuleInterface
 
     public function checkIn(User $user, Visitor $visitor, array $data): ?CheckIn
     {
-        //dd($data);
         $checkIn = $this->checkIn->create([
             'user_id' => $user->id,
             'visitor_id' => $visitor->id,
@@ -58,8 +56,6 @@ class CheckInModule implements CheckInModuleInterface
             'vehicle_number' => $data['vehicle_number'],
             'purpose_of_visit' => $data['purpose_of_visit'],
         ]);
-
-        //dump($checkIn);
         return $checkIn;
     }
 

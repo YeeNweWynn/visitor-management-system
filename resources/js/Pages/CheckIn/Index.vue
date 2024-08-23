@@ -21,7 +21,7 @@ import { Head } from "@inertiajs/vue3";
                     <Search />
                 </div>
                 <div class="p-4 sm:p-8 bg-white shadow sm:rounded-lg">
-                    <CheckInList class="max-w-xl" />
+                    <CheckInList />
                 </div>
             </div>
         </div>
