@@ -1,19 +1,15 @@
 <script setup>
-import InputError from "@/Components/InputError.vue";
-import InputLabel from "@/Components/InputLabel.vue";
 import PrimaryButton from "@/Components/PrimaryButton.vue";
 import SecondaryButton from "@/Components/SecondaryButton.vue";
 import TextInput from "@/Components/TextInput.vue";
-import { Link, useForm, usePage } from "@inertiajs/vue3";
+import { useForm } from "@inertiajs/vue3";
 
-const user = usePage().props.auth.user;
 const urlParams = new URLSearchParams(window.location.search);
 const form = useForm({
     name: urlParams.get("name") || "",
     email: urlParams.get("email") || "",
     phone_number: urlParams.get("phone_number") || "",
 });
-
 const searchVisitor = () => {
     const params = Object.fromEntries(
         Object.entries({
@@ -26,16 +22,12 @@ const searchVisitor = () => {
     form.get(
         route("visitor.index") + (searchParams ? `?${searchParams}` : ""),
         {
-            onSuccess: () => {
-                console.log("success");
-            },
             onError: () => {
-                console.log("error");
+                console.log("Visitor search failed");
             },
         }
     );
 };
-
 const clearFilters = () => {
     form.name = "";
     form.email = "";
@@ -44,7 +36,6 @@ const clearFilters = () => {
         replace: true,
         preserveState: false,
         onSuccess: () => {
-            console.log("filters cleared");
             window.history.replaceState(
                 {},
                 document.title,
@@ -52,22 +43,19 @@ const clearFilters = () => {
             );
         },
         onError: () => {
-            console.log("error clearing filters");
+            console.log("Clear filter failed");
         },
     });
 };
 </script>
-
 <template>
     <section>
         <header>
             <h2 class="text-lg font-medium text-gray-900">Search Visitor</h2>
-
             <p class="mt-1 text-sm text-gray-600">
                 Search visitor by name or email or phone number
             </p>
         </header>
-
         <div class="mt-6 space-y-6">
             <div class="flex flex-col md:flex-row">
                 <div class="w-full flex-1 mx-2">
@@ -79,7 +67,6 @@ const clearFilters = () => {
                         class="mt-1 block w-full"
                     />
                 </div>
-
                 <div class="w-full flex-1 mx-2">
                     <TextInput
                         v-model="form.email"

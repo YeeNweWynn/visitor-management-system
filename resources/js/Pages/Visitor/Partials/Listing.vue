@@ -19,16 +19,13 @@ const checkinTypes = usePage().props.checkinTypes;
 const purposeOfVisit = usePage().props.purposeOfVisit;
 const showModal = ref(false);
 const selectedVisitorId = ref(0);
-
 const openCheckinModal = (visitorId) => {
     selectedVisitorId.value = visitorId;
     showModal.value = true;
 };
-
 const closeCheckinModal = () => {
     showModal.value = false;
 };
-
 const checkinVisitor = (data) => {
     router.post(
         "/checkin",
@@ -49,7 +46,6 @@ const checkinVisitor = (data) => {
         }
     );
 };
-
 const checkoutVisitor = (checkinId) => {
     router.patch(
         `/checkin/${checkinId}?source=visitor`,
@@ -66,7 +62,6 @@ const checkoutVisitor = (checkinId) => {
     );
 };
 </script>
-
 <template>
     <div class="py-2">
         <p v-if="$page.props.flash.success" class="text-green-500">

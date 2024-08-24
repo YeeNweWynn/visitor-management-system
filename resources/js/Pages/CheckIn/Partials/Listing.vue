@@ -22,21 +22,18 @@ const headers = [
     "Action",
 ];
 const checkIns = usePage().props.checkIns.data;
-
 const formatDate = (dateString) => {
     if (!dateString) {
         return "-";
     }
     return format(new Date(dateString), "yyyy-MM-dd HH:mm:ss");
 };
-
 const checkoutVisitor = (checkinId) => {
     router.patch(
         `/checkin/${checkinId}?source=checkin`,
         {},
         {
-            onSuccess: (page) => {
-                console.log("Checkout success!");
+            onSuccess: () => {
                 window.location.reload();
             },
             onError: (errors) => {

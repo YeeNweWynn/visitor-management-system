@@ -1,20 +1,17 @@
 <script setup>
-import InputError from "@/Components/InputError.vue";
 import InputLabel from "@/Components/InputLabel.vue";
 import PrimaryButton from "@/Components/PrimaryButton.vue";
 import SecondaryButton from "@/Components/SecondaryButton.vue";
 import TextInput from "@/Components/TextInput.vue";
 import Select from "@/Components/Select.vue";
-import { Link, useForm, usePage } from "@inertiajs/vue3";
+import { useForm, usePage } from "@inertiajs/vue3";
 
-const user = usePage().props.auth.user;
 const visitStatus = usePage().props.visitStatus;
 const purposeOfVisit = [
     { value: "", label: "Purpose Of Visit", disabled: true },
     ...usePage().props.purposeOfVisit,
 ];
 const urlParams = new URLSearchParams(window.location.search);
-
 const form = useForm({
     email: urlParams.get("email") || "",
     phone_number: urlParams.get("phone_number") || "",
@@ -39,16 +36,12 @@ const searchCheckin = () => {
     form.get(
         route("checkin.index") + (searchParams ? `?${searchParams}` : ""),
         {
-            onSuccess: () => {
-                console.log("success");
-            },
             onError: () => {
-                console.log("error");
+                console.error("Check-in search failed");
             },
         }
     );
 };
-
 const clearFilters = () => {
     form.email = "";
     form.phone_number = "";
@@ -60,7 +53,6 @@ const clearFilters = () => {
         replace: true,
         preserveState: false,
         onSuccess: () => {
-            console.log("filters cleared");
             window.history.replaceState(
                 {},
                 document.title,
@@ -68,22 +60,19 @@ const clearFilters = () => {
             );
         },
         onError: () => {
-            console.log("error clearing filters");
+            console.error("Clear filter failed");
         },
     });
 };
 </script>
-
 <template>
     <section>
         <header>
             <h2 class="text-lg font-medium text-gray-900">Search Check In</h2>
-
             <p class="mt-1 text-sm text-gray-600">
                 Search check in by phone number or email or status or date
             </p>
         </header>
-
         <div class="mt-6 space-y-6">
             <div class="flex flex-col md:flex-row">
                 <div class="w-full flex-1 mx-2">

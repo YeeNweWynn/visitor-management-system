@@ -16,19 +16,16 @@ defineProps({
         default: () => [],
     },
 });
-
 const isUpdate = usePage().props.isUpdate;
 const visitor = usePage().props.visitor;
-const user = usePage().props.auth.user;
-
+const csrfToken = usePage().props.csrf_token;
 const form = useForm({
-    email: visitor.email,
-    name: visitor.name,
-    phone_number: visitor.phone_number,
-    address: visitor.address,
-    postal_code: visitor.postal_code,
+    email: visitor.email || "",
+    name: visitor.name || "",
+    phone_number: visitor.phone_number || "",
+    address: visitor.address || "",
+    postal_code: visitor.postal_code || "",
 });
-
 const handleSubmit = () => {
     if (isUpdate) {
         form.patch(route("visitor.update", visitor.id));
@@ -40,14 +37,12 @@ const goBack = () => {
     window.history.back();
 };
 </script>
-
 <template>
     <section>
         <header>
             <h2 class="text-lg font-medium text-gray-900">
                 Visitor Information
             </h2>
-
             <div v-if="isUpdate">
                 <p class="mt-1 text-sm text-gray-600">
                     Update visitor account's profile information and email
@@ -61,28 +56,22 @@ const goBack = () => {
                 </p>
             </div>
         </header>
-
         <form @submit.prevent="handleSubmit" class="mt-6 space-y-6">
             <input type="hidden" name="_token" :value="csrfToken" />
             <div>
                 <InputLabel for="name" value="Name" />
-
                 <TextInput
                     id="name"
                     type="text"
                     class="mt-1 block w-full"
                     v-model="form.name"
                     required
-                    autofocus
                     autocomplete="name"
                 />
-
                 <InputError class="mt-2" :message="form.errors.name" />
             </div>
-
             <div>
                 <InputLabel for="email" value="Email" />
-
                 <TextInput
                     id="email"
                     type="email"
@@ -91,13 +80,10 @@ const goBack = () => {
                     required
                     autocomplete="email"
                 />
-
                 <InputError class="mt-2" :message="form.errors.email" />
             </div>
-
             <div>
                 <InputLabel for="phone_number" value="Phone Number" />
-
                 <TextInput
                     id="phone_number"
                     type="text"
@@ -106,41 +92,31 @@ const goBack = () => {
                     required
                     autocomplete="tel"
                 />
-
                 <InputError class="mt-2" :message="form.errors.phone_number" />
             </div>
-
             <div>
                 <InputLabel for="address" value="Address" />
-
                 <TextInput
                     id="address"
                     type="text"
                     class="mt-1 block w-full"
                     v-model="form.address"
                     required
-                    autofocus
                     autocomplete="address"
                 />
-
                 <InputError class="mt-2" :message="form.errors.address" />
             </div>
-
             <div>
                 <InputLabel for="postal_code" value="Postal Code" />
-
                 <TextInput
                     id="postal_code"
                     type="text"
                     class="mt-1 block w-full"
                     v-model="form.postal_code"
-                    required
                     autocomplete="postal-code"
                 />
-
                 <InputError class="mt-2" :message="form.errors.postal_code" />
             </div>
-
             <div class="flex items-center gap-4">
                 <PrimaryButton :disabled="form.processing">Save</PrimaryButton>
                 <SecondaryButton @click="goBack">Cancel</SecondaryButton>

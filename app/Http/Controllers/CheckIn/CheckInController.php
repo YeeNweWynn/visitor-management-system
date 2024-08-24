@@ -96,12 +96,10 @@ class CheckInController extends Controller
     {
         $source = request()->query('source');
         $redirectRoute = $source === 'visitor' ? 'visitor.index' : 'checkin.index';
-    
         if ($this->checkin->checkOut($checkin)) {
             return Redirect::route($redirectRoute)
                 ->with('success', 'Successfully checked out!');
         }
-    
         return Redirect::route($redirectRoute)
             ->with('error', 'Failed to check out!');
     }

@@ -10,7 +10,6 @@ use App\Enums\PurposeOfVisit;
 use App\Http\Requests\VisitorCreateRequest;
 use App\Http\Requests\VisitorUpdateRequest;
 use App\Modules\Visitor\VisitorModuleInterface;
-use App\Modules\CheckIn\CheckInModuleInterface;
 use Illuminate\Support\Facades\Redirect;
 
 class VisitorController extends Controller
@@ -18,7 +17,6 @@ class VisitorController extends Controller
 
     public function __construct(
         protected VisitorModuleInterface $visitor, 
-        protected CheckInModuleInterface $checkIn
     ) {}
     
     /**
@@ -60,9 +58,11 @@ class VisitorController extends Controller
     public function store(VisitorCreateRequest $request)
     {
         $validated = $request->validated();
-
         $visitor = $this->visitor->create($request->user(), $validated);
-        return Redirect::route('visitor.index')->with('success', 'Visitor created successfully!');
+        if ($visitor) {
+            return Redirect::route('visitor.index')->with('success', 'Visitor created successfully!');
+        }
+        return Redirect::route('visitor.index')->with('error', 'Visitor creation failed!');
     }
 
     /**
@@ -71,7 +71,6 @@ class VisitorController extends Controller
     public function show(int $id)
     {
         $visitor = $this->visitor->find($id);
-
         return Inertia::render('Visitor/Edit', [
             'visitor' => $visitor,
             'isUpdate' => true,
