@@ -5,13 +5,13 @@ FROM node:20.2
 WORKDIR /var/www
 
 # Copy `package.json` and `package-lock.json`
-COPY package*.json ./
+# COPY package*.json ./
 
 # Install project dependencies
-RUN npm install
+# RUN npm install
 
 # Copy project files into the docker image
-COPY . .
+# COPY . .
 
 # Expose the port Vite runs on
 EXPOSE 3000
