@@ -18,7 +18,7 @@ return new class extends Migration
             $table->string('email')->unique();
             $table->string('phone_number');
             $table->string('address');
-            $table->mediumInteger('postal_code');
+            $table->string('postal_code');
             $table->softDeletes('deleted_at', precision: 0);
             $table->timestamps();
         });

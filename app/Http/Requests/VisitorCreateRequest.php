@@ -28,7 +28,7 @@ class VisitorCreateRequest extends FormRequest
             'email' => ['required', 'string', 'lowercase', 'email', 'max:255', Rule::unique(Visitor::class)],
             'phone_number' => ['required', 'string', 'regex:/^\d{1,15}$/'],
             'address' => ['required', 'string', 'max:255'],
-            'postal_code' => ['nullable', 'integer'],
+            'postal_code' => ['required', 'string', 'max:255'],
         ];
     }
 }

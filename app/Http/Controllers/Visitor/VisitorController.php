@@ -59,7 +59,6 @@ class VisitorController extends Controller
      */
     public function store(VisitorCreateRequest $request)
     {
-        \Log::info('Store method called');
         $validated = $request->validated();
 
         $visitor = $this->visitor->create($request->user(), $validated);
@@ -89,7 +88,7 @@ class VisitorController extends Controller
         $visitor = $this->visitor->find($id);
         $updated = $this->visitor->update($visitor, $validated);
         if ($updated) {
-            return Redirect::route('visitor.index')->with('success', 'Visitor created successfully!');
+            return Redirect::route('visitor.index')->with('success', 'Visitor updated successfully!');
         }
         return Redirect::route('visitor.index')->with('error', 'Update failed!');
     }

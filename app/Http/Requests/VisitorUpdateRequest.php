@@ -34,7 +34,7 @@ class VisitorUpdateRequest extends FormRequest
             ],            
             'phone_number' => ['required', 'string', 'regex:/^\d{1,15}$/'],
             'address' => ['required', 'string', 'max:255'],
-            'postal_code' => ['nullable', 'integer'],
+            'postal_code' => ['required', 'string', 'max:255'],
         ];
     }
 }

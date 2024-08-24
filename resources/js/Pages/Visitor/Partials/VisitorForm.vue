@@ -30,10 +30,8 @@ const form = useForm({
 
 const handleSubmit = () => {
     if (isUpdate) {
-        console.log("update form", form);
         form.patch(route("visitor.update", visitor.id));
     } else {
-        console.log("create form", form);
         form.post(route("visitor.store"));
     }
 };
@@ -132,6 +130,7 @@ const handleSubmit = () => {
                     type="text"
                     class="mt-1 block w-full"
                     v-model="form.postal_code"
+                    required
                     autocomplete="postal-code"
                 />
 
