@@ -49,24 +49,24 @@ class CheckInController extends Controller
             'type' => 'required',
             'purpose_of_visit' => 'required',
         ]);
-
+        
         $visitor = $this->visitor->find($request['visitor_id']);
 
         if (is_null($visitor)) {
-            return Redirect::back()->with('error', 'Cannot find visitor!');
+            return Redirect::route('visitor.index')->with('error', 'Cannot find visitor!');
         }
         
         $activeCheckin = $this->checkin->findActiveCheckInOf($visitor);
 
         if ($activeCheckin) {
-            return Redirect::back()->with('error', 'Visitor already checkedin!');
+            return Redirect::route('visitor.index')->with('error', 'Visitor already checkedin!');
         }
 
         if ($this->checkin->checkIn($request->user(), $visitor, $request->all())) {
-            return Redirect::back()->with('success', 'Successfully checked in!');
+            return Redirect::route('visitor.index')->with('success', 'Successfully checked in!');
         }
 
-        return Redirect::back()->with('error', 'Failed to check in!');
+        return Redirect::route('visitor.index')->with('error', 'Failed to check in!');
     }
 
    /**
@@ -90,10 +90,16 @@ class CheckInController extends Controller
      */
     public function update(CheckIn $checkin)
     {
+        $source = request()->query('source');
+        $redirectRoute = $source === 'visitor' ? 'visitor.index' : 'checkin.index';
+    
         if ($this->checkin->checkOut($checkin)) {
-            return Redirect::back()->with('success', 'Successfully checked out!');
+            return Redirect::route($redirectRoute)
+                ->with('success', 'Successfully checked out!');
         }
-        return Redirect::back()->with('error', 'Failed to check out!');
+    
+        return Redirect::route($redirectRoute)
+            ->with('error', 'Failed to check out!');
     }
 
     /**

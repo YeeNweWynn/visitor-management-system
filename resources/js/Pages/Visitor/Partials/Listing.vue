@@ -41,6 +41,7 @@ const checkinVisitor = (data) => {
         {
             onSuccess: () => {
                 showModal.value = false;
+                window.location.reload();
             },
             onError: (errors) => {
                 console.error("Error:", errors);
@@ -51,10 +52,11 @@ const checkinVisitor = (data) => {
 
 const checkoutVisitor = (checkinId) => {
     router.patch(
-        `/checkin/${checkinId}`,
+        `/checkin/${checkinId}?source=visitor`,
         {},
         {
-            onSuccess: (page) => {
+            onSuccess: () => {
+                window.location.reload();
                 console.log("Checkout success!");
             },
             onError: (errors) => {

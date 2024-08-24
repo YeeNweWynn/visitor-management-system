@@ -32,11 +32,12 @@ const formatDate = (dateString) => {
 
 const checkoutVisitor = (checkinId) => {
     router.patch(
-        `/checkin/${checkinId}`,
+        `/checkin/${checkinId}?source=checkin`,
         {},
         {
             onSuccess: (page) => {
                 console.log("Checkout success!");
+                window.location.reload();
             },
             onError: (errors) => {
                 console.error("Error:", errors);

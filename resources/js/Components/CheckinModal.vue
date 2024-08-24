@@ -1,5 +1,5 @@
 <script setup>
-import { defineProps, defineEmits, ref } from "vue";
+import { ref } from "vue";
 import Select from "@/Components/Select.vue";
 import TextInput from "@/Components/TextInput.vue";
 import InputError from "@/Components/InputError.vue";

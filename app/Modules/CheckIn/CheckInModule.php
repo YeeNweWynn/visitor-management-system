@@ -63,7 +63,9 @@ class CheckInModule implements CheckInModuleInterface
     public function checkOut(CheckIn $checkIn): bool
     {
         $checkIn->checked_out_at = now();
-        return $checkIn->save();
+        $data = $checkIn->save();
+        \Log::info('CheckInModule@checkOut', ['data' => $data]);
+        return $data;
     }
 
 }

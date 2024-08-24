@@ -62,7 +62,6 @@ class VisitorController extends Controller
         $validated = $request->validated();
 
         $visitor = $this->visitor->create($request->user(), $validated);
-        //return Inertia::render('Visitor/Edit', ['visitor' => $visitor, 'isUpdate' => true]);
         return Redirect::route('visitor.index')->with('success', 'Visitor created successfully!');
     }
 

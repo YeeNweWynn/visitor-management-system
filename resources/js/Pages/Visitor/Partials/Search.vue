@@ -7,12 +7,11 @@ import TextInput from "@/Components/TextInput.vue";
 import { Link, useForm, usePage } from "@inertiajs/vue3";
 
 const user = usePage().props.auth.user;
-const searchParams = usePage().props.searchParams || {};
-
+const urlParams = new URLSearchParams(window.location.search);
 const form = useForm({
-    name: searchParams.name || "",
-    email: searchParams.email || "",
-    phone_number: searchParams.phone_number || "",
+    name: urlParams.get("name") || "",
+    email: urlParams.get("email") || "",
+    phone_number: urlParams.get("phone_number") || "",
 });
 
 const searchVisitor = () => {

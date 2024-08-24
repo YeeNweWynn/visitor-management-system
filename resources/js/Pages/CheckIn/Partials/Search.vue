@@ -9,14 +9,14 @@ import { Link, useForm, usePage } from "@inertiajs/vue3";
 
 const user = usePage().props.auth.user;
 const visitStatus = usePage().props.visitStatus;
-const searchParams = usePage().props.searchParams || {};
+const urlParams = new URLSearchParams(window.location.search);
 
 const form = useForm({
-    email: searchParams.email || "",
-    phone_number: searchParams.phone_number || "",
-    status: searchParams.status || "all",
-    checked_in_at: searchParams.checked_in_at || "",
-    checked_out_at: searchParams.checked_out_at || "",
+    email: urlParams.get("email") || "",
+    phone_number: urlParams.get("phone_number") || "",
+    status: urlParams.get("status") || "all",
+    checked_in_at: urlParams.get("checked_in_at") || "",
+    checked_out_at: urlParams.get("checked_out_at") || "",
 });
 
 const searchCheckin = () => {
