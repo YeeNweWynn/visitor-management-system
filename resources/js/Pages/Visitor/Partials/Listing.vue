@@ -53,7 +53,6 @@ const checkoutVisitor = (checkinId) => {
         {
             onSuccess: () => {
                 window.location.reload();
-                console.log("Checkout success!");
             },
             onError: (errors) => {
                 console.error("Error:", errors);
@@ -62,6 +61,7 @@ const checkoutVisitor = (checkinId) => {
     );
 };
 </script>
+
 <template>
     <div class="py-2">
         <p v-if="$page.props.flash.success" class="text-green-500">

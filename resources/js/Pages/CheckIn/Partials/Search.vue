@@ -65,6 +65,7 @@ const clearFilters = () => {
     });
 };
 </script>
+
 <template>
     <section>
         <header>

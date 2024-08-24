@@ -37,6 +37,7 @@ const goBack = () => {
     window.history.back();
 };
 </script>
+
 <template>
     <section>
         <header>
@@ -45,14 +46,12 @@ const goBack = () => {
             </h2>
             <div v-if="isUpdate">
                 <p class="mt-1 text-sm text-gray-600">
-                    Update visitor account's profile information and email
-                    address.
+                    Update visitor account's profile information.
                 </p>
             </div>
             <div v-else>
                 <p class="mt-1 text-sm text-gray-600">
-                    Create visitor account's profile information and email
-                    address.
+                    Create visitor account's profile information.
                 </p>
             </div>
         </header>

@@ -18,7 +18,7 @@ const headers = [
     "Type",
     "In",
     "Out",
-    "Reason",
+    "Purpose",
     "Action",
 ];
 const checkIns = usePage().props.checkIns.data;
