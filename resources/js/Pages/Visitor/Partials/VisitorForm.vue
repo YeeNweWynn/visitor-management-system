@@ -2,6 +2,7 @@
 import InputError from "@/Components/InputError.vue";
 import InputLabel from "@/Components/InputLabel.vue";
 import PrimaryButton from "@/Components/PrimaryButton.vue";
+import SecondaryButton from "@/Components/SecondaryButton.vue";
 import TextInput from "@/Components/TextInput.vue";
 import { Link, useForm, usePage } from "@inertiajs/vue3";
 
@@ -34,6 +35,9 @@ const handleSubmit = () => {
     } else {
         form.post(route("visitor.store"));
     }
+};
+const goBack = () => {
+    window.history.back();
 };
 </script>
 
@@ -139,7 +143,7 @@ const handleSubmit = () => {
 
             <div class="flex items-center gap-4">
                 <PrimaryButton :disabled="form.processing">Save</PrimaryButton>
-
+                <SecondaryButton @click="goBack">Cancel</SecondaryButton>
                 <Transition
                     enter-active-class="transition ease-in-out"
                     enter-from-class="opacity-0"

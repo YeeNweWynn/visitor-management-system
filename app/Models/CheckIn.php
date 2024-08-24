@@ -45,22 +45,24 @@ class CheckIn extends Model
         return $this->belongsTo(User::class);
     }
 
-    public function scopeWithVisitorEmail(Builder $query, ?string $email): void 
+    public function scopeWithVisitorEmail(Builder $query, ?string $email): Builder 
     {
-      if ($email) {
-            $query->with(['visitor' => function($q) use($email){
+        if ($email) {
+            return $query->whereHas('visitor', function ($q) use ($email) {
                 $q->where('email', $email);
-            }]);
+            });
         }
+        return $query;
     }
 
-    public function scopeWithVisitorPhone(Builder $query, ?string $phone): void 
+    public function scopeWithVisitorPhone(Builder $query, ?string $phone): Builder 
     {
         if ($phone) {
-            $query->with(['visitor' => function($q) use($phone){
+            return $query->whereHas('visitor', function ($q) use ($phone) {
                 $q->where('phone_number', $phone);
-            }]);
+            });
         }
+        return $query;
     }
 
     public function scopeWithCheckedIn(Builder $query, ?string $checkedInAt, ?string $checkedOutAt, bool $isActiveOnly = false): void 
@@ -70,6 +72,7 @@ class CheckIn extends Model
             !is_null($checkedInAt) && is_null($checkedOutAt) && $isActiveOnly => $query->whereDate('checked_in_at', $checkedInAt)->whereNull('checked_out_at'),
             !is_null($checkedInAt) && is_null($checkedOutAt) && !$isActiveOnly => $query->whereDate('checked_in_at', $checkedInAt),
             !is_null($checkedInAt) && !is_null($checkedOutAt) => $query->whereDate('checked_in_at', $checkedInAt)->whereDate('checked_out_at', $checkedOutAt),
+            $isActiveOnly => $query->whereNull('checked_out_at'),
             true => $query,
         };
     }

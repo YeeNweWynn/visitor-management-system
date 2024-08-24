@@ -18,7 +18,6 @@ const form = useForm({
     checked_in_at: urlParams.get("checked_in_at") || "",
     checked_out_at: urlParams.get("checked_out_at") || "",
 });
-
 const searchCheckin = () => {
     const params = Object.fromEntries(
         Object.entries({
