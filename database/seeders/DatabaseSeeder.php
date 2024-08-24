@@ -15,20 +15,6 @@ class DatabaseSeeder extends Seeder
      */
     public function run(): void
     {
-
-        // User::factory()->create([
-        //     'name' => 'Test User',
-        //     'email' => 'test@example.com',
-        // ]);
-
-        // $vistors = Visitor::factory(10)->for($users)->create();
-
-        // $user = User::factory()->has(Visitor::factory()->count(10))->create();
-        // $user = User::find(1);
-        // $visitor = Visitor::find(1);
-
-        // CheckIn::factory(10)->for($user)->for($visitor)->create();
-
         $user = User::factory()->create();
 
         $visitors = Visitor::factory(12)->for($user)->create();

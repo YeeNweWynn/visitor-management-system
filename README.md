@@ -1,4 +1,4 @@
-# visitor-management-system
+# Visitor Management System
 
     Visitor Management System is a web application built with Laravel Breeze and Inertia.js.
 
@@ -26,7 +26,17 @@
 
     ```bash
     cp .env.example .env
+
     ```
+
+    If you use docker environment which contain together with app, set the database configuration as follow.
+
+    DB_CONNECTION=mysql
+    DB_HOST=mysql
+    DB_PORT=3306
+    DB_DATABASE=visitor_management
+    DB_USERNAME=root
+    DB_PASSWORD=root
 
 3. **Build and Start Docker Containers:**
 
@@ -34,11 +44,15 @@
     docker-compose up -d
     ```
 
-4. **Install PHP Dependencies:**
+4. **Setup Laravel:**
 
     ```bash
     docker-compose exec laravel bash
     composer install
+    php artisan key:generate
+    php artisan migrate
+    php artisan db:seed
+
     ```
 
 5. **Install Node.js Dependencies:**
@@ -49,21 +63,7 @@
     npm run dev
     ```
 
-6. **Run Laravel Migrations:**
-
-    ```bash
-    docker-compose exec laravel bash
-    php artisan migrate
-    ```
-
-7. **Run Laravel Seeder:**
-
-    ```bash
-    docker-compose exec laravel bash
-    php artisan db:seed
-    ```
-
-8. **Accessing the Application:**
+6. **Accessing the Application:**
 
     Open [http://localhost:8080](http://localhost:8080) in your web browser.
 
@@ -71,14 +71,7 @@
 
 -   **Database Connection:**
 
-        Verify `.env` file settings.
-
--   **File Permissions:**
-
-    ```bash
-    docker-compose exec laravel bash
-    chmod -R 775 storage
-    ```
+    Verify `.env` file settings.
 
 -   **Rebuild Containers:**
 
@@ -91,8 +84,10 @@
 
     . Visitor Creation: Staff can create new visitor records with details such as name, email, phone, address, and postal code.
     . Visitor Editing: Staff can edit existing visitor records to update information including name, email, phone, address, and postal code.
-    . Visitor Check-In: Staff can check in visitors by providing check-in type, purpose, and vehicle number (if applicable). If a visitor is already checked in and has not checked out, they cannot check in again.
+    . Visitor Check-In: Staff can check in visitors by providing check-in type, purpose, and vehicle number (if applicable). If a visitor is already checked in and has not checked out, they     
+      cannot check in again.
     . Visitor Check-Out: Staff can process the check-out of visitors.
     • Visitor Search: Staff can search for specific visitors using various criteria such as name, email, phone number, allowing for efficient access to visitor records.
-    •Check-In Search: Staff can search for specific check-ins using criteria such as email, phone number, check-in date, check-out date, or status, enabling quick retrieval of check-in records.
-    . Dashboard: The dashboard displays all check-in data and includes filtering options by check-in date, check-out date, email, phone, and status. It also allows staff to check out visitors directly from the dashboard.
+    • Check-In Search: Staff can search for specific check-ins using criteria such as email, phone number, check-in date, check-out date, or status, enabling quick retrieval of check-in records.
+    . Dashboard: The dashboard displays all check-in data and includes filtering options by check-in date, check-out date, status, email, phone, and purpose of visit. It also allows staff to 
+     check out visitors directly from the dashboard.

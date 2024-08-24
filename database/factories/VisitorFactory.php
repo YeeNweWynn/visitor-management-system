@@ -19,9 +19,9 @@ class VisitorFactory extends Factory
         return [
             'name' => fake()->name(),
             'email' => fake()->unique()->safeEmail(), 
-            'phone_number' => '123456', 
+            'phone_number' => '0808620200', 
             'address' => fake()->address(), 
-            'postal_code' => 670131,
+            'postal_code' => 10310,
         ];
     }
 }
