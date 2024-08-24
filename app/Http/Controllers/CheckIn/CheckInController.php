@@ -5,6 +5,7 @@ namespace App\Http\Controllers\CheckIn;
 use Inertia\Inertia;
 use App\Models\CheckIn;
 use App\Enums\VisitStatus;
+use App\Enums\PurposeOfVisit;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Modules\CheckIn\CheckInModuleInterface;
@@ -28,8 +29,11 @@ class CheckInController extends Controller
             'value' => $type->Type(),
             'label' => $type->name
         ], VisitStatus::cases());
-        
-        return Inertia::render('CheckIn/Index', ['checkIns' => $checkIns, 'visitStatus' => $visitStatus]);
+        $purposeOfVisit = array_map(fn($type) => [
+            'value' => $type->Type(),
+            'label' => $type->name
+        ], PurposeOfVisit::cases());
+        return Inertia::render('CheckIn/Index', ['checkIns' => $checkIns, 'visitStatus' => $visitStatus, 'purposeOfVisit' => $purposeOfVisit]);
     }
 
     /**

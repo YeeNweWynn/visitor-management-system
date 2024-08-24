@@ -9,11 +9,16 @@ import { Link, useForm, usePage } from "@inertiajs/vue3";
 
 const user = usePage().props.auth.user;
 const visitStatus = usePage().props.visitStatus;
+const purposeOfVisit = [
+    { value: "", label: "Purpose Of Visit", disabled: true },
+    ...usePage().props.purposeOfVisit,
+];
 const urlParams = new URLSearchParams(window.location.search);
 
 const form = useForm({
     email: urlParams.get("email") || "",
     phone_number: urlParams.get("phone_number") || "",
+    purpose_of_visit: urlParams.get("purpose_of_visit") || "",
     status: urlParams.get("status") || "all",
     checked_in_at: urlParams.get("checked_in_at") || "",
     checked_out_at: urlParams.get("checked_out_at") || "",
@@ -23,6 +28,7 @@ const searchCheckin = () => {
         Object.entries({
             email: form.email,
             phone_number: form.phone_number,
+            purpose_of_visit: form.purpose_of_visit,
             status: form.status,
             checked_in_at: form.checked_in_at,
             checked_out_at: form.checked_out_at,
@@ -46,6 +52,7 @@ const searchCheckin = () => {
 const clearFilters = () => {
     form.email = "";
     form.phone_number = "";
+    form.purpose_of_visit = "";
     form.status = "all";
     form.checked_in_at = "";
     form.checked_out_at = "";
@@ -96,6 +103,14 @@ const clearFilters = () => {
                         placeholder="94XXXXXX"
                         class="mt-1 block w-full"
                     />
+                </div>
+                <div class="w-full flex-1 mx-2">
+                    <div class="mb-4">
+                        <Select
+                            v-model="form.purpose_of_visit"
+                            :options="purposeOfVisit"
+                        />
+                    </div>
                 </div>
                 <div class="w-full flex-1 mx-2">
                     <div class="mb-4">

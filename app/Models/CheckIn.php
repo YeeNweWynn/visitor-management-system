@@ -77,17 +77,10 @@ class CheckIn extends Model
         };
     }
     
-    public function scopeWithType(Builder $query, ?string $type): void 
+    public function scopeWithPurposeOfVisit(Builder $query, ?string $purposeOfVisit): void 
     {
-        if ($type) {
-            $query->where('type', $type);
-        }
-    }
-
-    public function scopeWithVehicleNumber(Builder $query, ?string $vehicleNumber): void 
-    {
-        if ($vehicleNumber) {
-            $query->where('vehicle_number', $vehicleNumber);
+        if ($purposeOfVisit) {
+            $query->where('purpose_of_visit', $purposeOfVisit);
         }
     }
 }

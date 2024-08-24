@@ -22,19 +22,15 @@ class CheckInModule implements CheckInModuleInterface
         $phone = $data['phone_number'] ?? null;
         $checkedInAt = $data['checked_in_at'] ?? null;
         $checkedOutAt = $data['checked_out_at'] ?? null;
-        $type = $data['type'] ?? null;
-        $vehicleNumber = $data['vehicle_number'] ?? null;
+        $purpose_of_visit = $data['purpose_of_visit'] ?? null;
         $isActiveOnly = ($data['status'] ?? 'all') === 'active';
-
         $query = $this->checkIn
                     ->with('user')
                     ->with('visitor')
                     ->withVisitorEmail($email)
                     ->withVisitorPhone($phone)
                     ->withCheckedIn($checkedInAt, $checkedOutAt, $isActiveOnly)
-                    ->withType($type)
-                    ->withVehicleNumber($vehicleNumber);
-        
+                    ->withPurposeOfVisit($purpose_of_visit);
         return $query->orderby('checked_in_at', 'desc')->paginate($limit)->withQueryString();
     }
 
