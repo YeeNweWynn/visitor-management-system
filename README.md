@@ -30,21 +30,22 @@
     ```
 
     If you use the docker environment which contains together with app, set the database configuration as follows.
-  ```bash
+   
+    ```bash
     DB_CONNECTION=mysql
     DB_HOST=mysql
     DB_PORT=3306
     DB_DATABASE=visitor_management
     DB_USERNAME=root
     DB_PASSWORD=root
-```
-3. **Build and Start Docker Containers:**
+    ```
+4. **Build and Start Docker Containers:**
 
     ```bash
     docker-compose up -d
     ```
 
-4. **Setup Laravel:**
+5. **Setup Laravel:**
 
     ```bash
     docker-compose exec laravel bash
@@ -55,7 +56,7 @@
 
     ```
 
-5. **Install Node.js Dependencies:**
+6. **Install Node.js Dependencies:**
 
     ```bash
     docker-compose exec node bash
@@ -63,7 +64,7 @@
     npm run dev
     ```
 
-6. **Accessing the Application:**
+7. **Accessing the Application:**
 
     Open [http://localhost:8080](http://localhost:8080) in your web browser.
 
