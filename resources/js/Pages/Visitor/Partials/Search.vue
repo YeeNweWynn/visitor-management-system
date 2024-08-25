@@ -5,11 +5,13 @@ import TextInput from "@/Components/TextInput.vue";
 import { useForm } from "@inertiajs/vue3";
 
 const urlParams = new URLSearchParams(window.location.search);
+
 const form = useForm({
     name: urlParams.get("name") || "",
     email: urlParams.get("email") || "",
     phone_number: urlParams.get("phone_number") || "",
 });
+
 const searchVisitor = () => {
     const params = Object.fromEntries(
         Object.entries({
@@ -18,7 +20,9 @@ const searchVisitor = () => {
             phone_number: form.phone_number,
         }).filter(([key, value]) => value && value.trim() !== "")
     );
+
     const searchParams = new URLSearchParams(params).toString();
+
     form.get(
         route("visitor.index") + (searchParams ? `?${searchParams}` : ""),
         {
@@ -28,6 +32,7 @@ const searchVisitor = () => {
         }
     );
 };
+
 const clearFilters = () => {
     form.name = "";
     form.email = "";
@@ -57,6 +62,7 @@ const clearFilters = () => {
                 Search visitor by name or email or phone number
             </p>
         </header>
+
         <div class="mt-6 space-y-6">
             <div class="flex flex-col md:flex-row">
                 <div class="w-full flex-1 mx-2">
@@ -68,6 +74,7 @@ const clearFilters = () => {
                         class="mt-1 block w-full"
                     />
                 </div>
+
                 <div class="w-full flex-1 mx-2">
                     <TextInput
                         v-model="form.email"
@@ -77,6 +84,7 @@ const clearFilters = () => {
                         class="mt-1 block w-full"
                     />
                 </div>
+
                 <div class="w-full flex-1 mx-2">
                     <TextInput
                         v-model="form.phone_number"
@@ -86,6 +94,7 @@ const clearFilters = () => {
                         class="mt-1 block w-full"
                     />
                 </div>
+
                 <div
                     class="w-full flex-1 flex flex-wrap items-end space-x-2 space-y-2 md:space-y-0 mx-2"
                 >

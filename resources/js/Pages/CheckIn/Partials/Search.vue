@@ -7,11 +7,14 @@ import Select from "@/Components/Select.vue";
 import { useForm, usePage } from "@inertiajs/vue3";
 
 const visitStatus = usePage().props.visitStatus;
+
 const purposeOfVisit = [
     { value: "", label: "Purpose Of Visit", disabled: true },
     ...usePage().props.purposeOfVisit,
 ];
+
 const urlParams = new URLSearchParams(window.location.search);
+
 const form = useForm({
     email: urlParams.get("email") || "",
     phone_number: urlParams.get("phone_number") || "",
@@ -20,6 +23,7 @@ const form = useForm({
     checked_in_at: urlParams.get("checked_in_at") || "",
     checked_out_at: urlParams.get("checked_out_at") || "",
 });
+
 const searchCheckin = () => {
     const params = Object.fromEntries(
         Object.entries({
@@ -33,6 +37,7 @@ const searchCheckin = () => {
     );
 
     const searchParams = new URLSearchParams(params).toString();
+
     form.get(
         route("checkin.index") + (searchParams ? `?${searchParams}` : ""),
         {
@@ -42,6 +47,7 @@ const searchCheckin = () => {
         }
     );
 };
+
 const clearFilters = () => {
     form.email = "";
     form.phone_number = "";
@@ -49,6 +55,7 @@ const clearFilters = () => {
     form.status = "all";
     form.checked_in_at = "";
     form.checked_out_at = "";
+
     form.get(route("checkin.index"), {
         replace: true,
         preserveState: false,
@@ -74,6 +81,7 @@ const clearFilters = () => {
                 Search check in by phone number or email or status or date
             </p>
         </header>
+
         <div class="mt-6 space-y-6">
             <div class="flex flex-col md:flex-row">
                 <div class="w-full flex-1 mx-2">
@@ -85,6 +93,7 @@ const clearFilters = () => {
                         class="mt-1 block w-full"
                     />
                 </div>
+
                 <div class="w-full flex-1 mx-2">
                     <TextInput
                         v-model="form.phone_number"
@@ -94,22 +103,22 @@ const clearFilters = () => {
                         class="mt-1 block w-full"
                     />
                 </div>
+
                 <div class="w-full flex-1 mx-2">
-                    <div class="mb-4">
-                        <Select
-                            v-model="form.purpose_of_visit"
-                            :options="purposeOfVisit"
-                        />
-                    </div>
-                </div>
-                <div class="w-full flex-1 mx-2">
-                    <div class="mb-4">
-                        <Select v-model="form.status" :options="visitStatus" />
-                    </div>
+                    <Select
+                        v-model="form.purpose_of_visit"
+                        :options="purposeOfVisit"
+                    />
                 </div>
             </div>
+
             <div class="flex flex-col md:flex-row mt-4">
-                <div class="w-full flex-1 mx-2">
+                <div class="w-full flex-1 mx-2 mb-2 md:mb-0">
+                    <InputLabel for="status" value="Status" />
+                    <Select v-model="form.status" :options="visitStatus" />
+                </div>
+
+                <div class="w-full flex-1 mx-2 mb-2 md:mb-0">
                     <InputLabel for="check_in_date" value="Check-in Date" />
 
                     <TextInput
@@ -120,7 +129,8 @@ const clearFilters = () => {
                         class="mt-1 block w-full"
                     />
                 </div>
-                <div class="w-full flex-1 mx-2">
+
+                <div class="w-full flex-1 mx-2 mb-4">
                     <InputLabel for="check_out_date" value="Check-out Date" />
                     <TextInput
                         v-model="form.checked_out_at"
@@ -130,17 +140,16 @@ const clearFilters = () => {
                         class="mt-1 block w-full"
                     />
                 </div>
+
                 <div
-                    class="w-full flex-1 flex flex-wrap items-end space-x-2 space-y-2 md:space-y-0 mx-2"
+                    class="w-full flex-1 md:flex items-center space-x-2 space-y-2 md:space-y-0 mx-2"
                 >
                     <PrimaryButton
-                        class="h-10"
                         :disabled="form.processing"
                         @click="searchCheckin"
                         >Search</PrimaryButton
                     >
                     <SecondaryButton
-                        class="h-10"
                         :disabled="form.processing"
                         @click="clearFilters"
                         >Clear</SecondaryButton

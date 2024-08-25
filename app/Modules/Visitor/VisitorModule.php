@@ -21,19 +21,10 @@ class VisitorModule implements VisitorModuleInterface
 
         $query = $this->visitor
                 ->with('user')
-                ->withActiveCheckIn();
-
-        if ($name) {
-            $query->where('name', 'like', "%$name%");
-        }
-
-        if ($email) {
-            $query->where('email', $email);
-        }
-
-        if ($phone) {
-            $query->where('phone_number', $phone);
-        }
+                ->withActiveCheckIn()
+                ->whereName($name)
+                ->whereEmail($email)
+                ->wherePhoneNumber($phone);
 
         return $query->paginate($limit)->withQueryString();
         
