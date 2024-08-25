@@ -82,12 +82,23 @@
 
 ## Implemented Scenarios
 
-    . Visitor Creation: Staff can create new visitor records with details such as name, email, phone, address, and postal code.
-    . Visitor Editing: Staff can edit existing visitor records to update information including name, email, phone, address, and postal code.
-    . Visitor Check-In: Staff can check in visitors by providing check-in type, purpose, and vehicle number (if applicable). If a visitor is already checked in and has not checked out, they
-      cannot check in again.
-    . Visitor Check-Out: Staff can process the check-out of visitors.
-    • Visitor Search: Staff can search for specific visitors using various criteria such as name, email, phone number, allowing for efficient access to visitor records.
-    • Check-In Search: Staff can search for specific check-ins using criteria such as email, phone number, check-in date, check-out date, or status, enabling quick retrieval of check-in records.
-    . Dashboard: The dashboard displays all check-in data and includes filtering options by check-in date, check-out date, status, email, phone, and purpose of visit. It also allows staff to
-     check out visitors directly from the dashboard.
+    - **Visitor Creation**:  
+  Staff can create new visitor records with details such as name, email, phone, address, and postal code.
+
+- **Visitor Editing**:  
+  Staff can edit existing visitor records to update information including name, email, phone, address, and postal code.
+
+- **Visitor Check-In**:  
+  Staff can check in visitors by providing check-in type, purpose, and vehicle number (if applicable). If a visitor is already checked in and has not checked out, they cannot check in again.
+
+- **Visitor Check-Out**:  
+  Staff can process the check-out of visitors.
+
+- **Visitor Search**:  
+  Staff can search for specific visitors using various criteria such as name, email, or phone number, allowing for efficient access to visitor records.
+
+- **Check-In Search**:  
+  Staff can search for specific check-ins using criteria such as email, phone number, check-in date, check-out date, or status, enabling quick retrieval of check-in records.
+
+- **Dashboard**:  
+  The dashboard displays all check-in data and includes filtering options by check-in date, check-out date, status, email, phone, and purpose of visit. It also allows staff to check out visitors directly from the dashboard.
