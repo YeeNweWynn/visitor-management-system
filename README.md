@@ -29,7 +29,7 @@
 
     ```
 
-    If you use docker environment which contain together with app, set the database configuration as follow.
+    If you use the docker environment which contains together with app, set the database configuration as follows.
 
     DB_CONNECTION=mysql
     DB_HOST=mysql
@@ -48,13 +48,9 @@
 
     ```bash
     docker-compose exec laravel bash
-    
     composer install
-    
     php artisan migrate
-    
     php artisan db:seed
-
     php artisan key:generate
 
     ```
@@ -63,9 +59,7 @@
 
     ```bash
     docker-compose exec node bash
-    
     npm install
-    
     npm run dev
     ```
 
