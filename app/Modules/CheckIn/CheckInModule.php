@@ -2,7 +2,6 @@
 
 namespace App\Modules\CheckIn;
 
-use Carbon\Carbon;
 use App\Models\User;
 use App\Models\CheckIn;
 use App\Models\Visitor;
@@ -17,13 +16,14 @@ class CheckInModule implements CheckInModuleInterface
 
     public function search(array $data): ?LengthAwarePaginator
     {
-        $limit = $data['limit'] ?? 5;
+        $limit = $data['limit'] ?? 10;
         $email = $data['email'] ?? null;
         $phone = $data['phone_number'] ?? null;
         $checkedInAt = $data['checked_in_at'] ?? null;
         $checkedOutAt = $data['checked_out_at'] ?? null;
         $purpose_of_visit = $data['purpose_of_visit'] ?? null;
         $isActiveOnly = ($data['status'] ?? 'all') === 'active';
+
         $query = $this->checkIn
                     ->with('user')
                     ->with('visitor')
@@ -31,6 +31,7 @@ class CheckInModule implements CheckInModuleInterface
                     ->withVisitorPhone($phone)
                     ->withCheckedIn($checkedInAt, $checkedOutAt, $isActiveOnly)
                     ->withPurposeOfVisit($purpose_of_visit);
+
         return $query->orderby('checked_in_at', 'desc')->paginate($limit)->withQueryString();
     }
 
@@ -52,6 +53,7 @@ class CheckInModule implements CheckInModuleInterface
             'vehicle_number' => $data['vehicle_number'],
             'purpose_of_visit' => $data['purpose_of_visit'],
         ]);
+
         return $checkIn;
     }
 
@@ -59,7 +61,9 @@ class CheckInModule implements CheckInModuleInterface
     public function checkOut(CheckIn $checkIn): bool
     {
         $checkIn->checked_out_at = now();
+
         $data = $checkIn->save();
+
         return $data;
     }
 

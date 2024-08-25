@@ -14,7 +14,6 @@ use Illuminate\Support\Facades\Redirect;
 
 class VisitorController extends Controller
 {
-
     public function __construct(
         protected VisitorModuleInterface $visitor, 
     ) {}
@@ -25,6 +24,7 @@ class VisitorController extends Controller
     public function index(Request $request)
     {
         $visitors = $this->visitor->search($request->all());
+        
         $checkinTypes = array_map(fn($type) => [
             'value' => $type->Type(),
             'label' => $type->name
@@ -58,10 +58,13 @@ class VisitorController extends Controller
     public function store(VisitorCreateRequest $request)
     {
         $validated = $request->validated();
+
         $visitor = $this->visitor->create($request->user(), $validated);
+
         if ($visitor) {
             return Redirect::route('visitor.index')->with('success', 'Visitor created successfully!');
         }
+        
         return Redirect::route('visitor.index')->with('error', 'Visitor creation failed!');
     }
 
@@ -71,6 +74,7 @@ class VisitorController extends Controller
     public function show(int $id)
     {
         $visitor = $this->visitor->find($id);
+
         return Inertia::render('Visitor/Edit', [
             'visitor' => $visitor,
             'isUpdate' => true,
@@ -83,19 +87,14 @@ class VisitorController extends Controller
     public function update(VisitorUpdateRequest $request, int $id)
     {
         $validated = $request->validated();
+
         $visitor = $this->visitor->find($id);
         $updated = $this->visitor->update($visitor, $validated);
+
         if ($updated) {
             return Redirect::route('visitor.index')->with('success', 'Visitor updated successfully!');
         }
-        return Redirect::route('visitor.index')->with('error', 'Update failed!');
-    }
 
-    /**
-     * Remove the specified resource from storage.
-     */
-    public function destroy(string $id)
-    {
-        //
+        return Redirect::route('visitor.index')->with('error', 'Update failed!');
     }
 }

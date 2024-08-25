@@ -24,4 +24,18 @@ class CheckInFactory extends Factory
             'purpose_of_visit' => 'meeting'
         ];
     }
+
+    /**
+     * Indicate that the check-in has been checked out.
+     *
+     * @return \Illuminate\Database\Eloquent\Factories\Factory
+     */
+    public function checkedOut()
+    {
+        return $this->state(function (array $attributes) {
+            return [
+                'checked_out_at' => now(),
+            ];
+        });
+    }
 }

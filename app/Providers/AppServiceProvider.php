@@ -2,11 +2,9 @@
 
 namespace App\Providers;
 
-use App\Modules\Search\SearchModule;
 use App\Modules\CheckIn\CheckInModule;
 use App\Modules\Visitor\VisitorModule;
 use Illuminate\Support\ServiceProvider;
-use App\Modules\Search\SearchModuleInterface;
 use App\Modules\CheckIn\CheckInModuleInterface;
 use App\Modules\Visitor\VisitorModuleInterface;
 

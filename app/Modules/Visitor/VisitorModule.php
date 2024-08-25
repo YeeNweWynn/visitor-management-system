@@ -4,20 +4,17 @@ namespace App\Modules\Visitor;
 
 use App\Models\User;
 use App\Models\Visitor;
-use App\Modules\CheckIn\CheckInModuleInterface;
 use Illuminate\Pagination\LengthAwarePaginator;
 
 class VisitorModule implements VisitorModuleInterface
 {
     public function __construct(
-        protected Visitor $visitor,
-        protected CheckInModuleInterface $checkInModule
-
+        protected Visitor $visitor
     ) {}
 
     public function search(array $data): ?LengthAwarePaginator 
     {
-        $limit = $data['limit'] ?? 5;
+        $limit = $data['limit'] ?? 10;
         $name = $data['name'] ?? null;
         $email = $data['email'] ?? null;
         $phone = $data['phone_number'] ?? null;
@@ -64,21 +61,12 @@ class VisitorModule implements VisitorModuleInterface
     public function update(Visitor $visitor, array $data): bool
     {
         $visitor->fill($data);
+        
         return $visitor->save();
     }
 
     public function delete(int $id): bool
     {
         return $this->visitor->destroy($id);
-    }
-
-    public function checkout(Visitor $visitor): bool
-    {
-        $activeCheckIn = $this->checkInModule->findActiveCheckInOf($visitor);
-        if ($activeCheckIn) {
-            $this->checkInModule->checkOut($activeCheckIn);
-            return true;
-        }
-        return false;
     }
 }

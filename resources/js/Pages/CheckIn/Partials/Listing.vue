@@ -1,7 +1,7 @@
 <script setup>
 import Pagination from "@/Components/Pagination.vue";
 import DangerButton from "@/Components/DangerButton.vue";
-import { Link, useForm, usePage, router } from "@inertiajs/vue3";
+import { usePage, router } from "@inertiajs/vue3";
 import { format } from "date-fns";
 
 defineProps({
@@ -21,13 +21,16 @@ const headers = [
     "Purpose",
     "Action",
 ];
+
 const checkIns = usePage().props.checkIns.data;
+
 const formatDate = (dateString) => {
     if (!dateString) {
         return "-";
     }
     return format(new Date(dateString), "yyyy-MM-dd HH:mm:ss");
 };
+
 const checkoutVisitor = (checkinId) => {
     router.patch(
         `/checkin/${checkinId}?source=checkin`,
@@ -53,6 +56,7 @@ const checkoutVisitor = (checkinId) => {
             {{ $page.props.flash.error }}
         </p>
     </div>
+
     <div class="overflow-x-auto">
         <table class="w-full whitespace-no-wrapw-full whitespace-no-wrap">
             <thead>
@@ -66,6 +70,7 @@ const checkoutVisitor = (checkinId) => {
                     </th>
                 </tr>
             </thead>
+
             <tbody>
                 <tr v-for="checkIn in checkIns" :key="checkIn.id">
                     <td class="border px-6 py-4">
@@ -109,5 +114,6 @@ const checkoutVisitor = (checkinId) => {
             </tbody>
         </table>
     </div>
+
     <Pagination class="mt-6" :links="usePage().props.checkIns.links" />
 </template>
