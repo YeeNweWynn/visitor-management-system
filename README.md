@@ -48,8 +48,11 @@
 
     ```bash
     docker-compose exec laravel bash
+    
     composer install
+    
     php artisan migrate
+    
     php artisan db:seed
 
     php artisan key:generate
@@ -60,7 +63,9 @@
 
     ```bash
     docker-compose exec node bash
+    
     npm install
+    
     npm run dev
     ```
 
