@@ -82,7 +82,7 @@
 
 ## Implemented Scenarios
 
-    - **Visitor Creation**:  
+ - **Visitor Creation**:  
   Staff can create new visitor records with details such as name, email, phone, address, and postal code.
 
 - **Visitor Editing**:  
