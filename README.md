@@ -30,14 +30,14 @@
     ```
 
     If you use the docker environment which contains together with app, set the database configuration as follows.
-
+  ```bash
     DB_CONNECTION=mysql
     DB_HOST=mysql
     DB_PORT=3306
     DB_DATABASE=visitor_management
     DB_USERNAME=root
     DB_PASSWORD=root
-
+```
 3. **Build and Start Docker Containers:**
 
     ```bash
